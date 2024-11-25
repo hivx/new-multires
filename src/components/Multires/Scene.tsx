@@ -19,12 +19,14 @@ export default function Cube360Viewer() {
 
    const isMobile = width < 768;
 
+   const maxLevel = isMobile ? 5 : 7;
+
    return (
       <Suspense fallback={null}>
          <Canvas
             className="h-full w-full"
-            onWheel={(event) => handleWheel(event, cameraRef.current, setFov)}
-            onTouchMove={(event) => handleTouchMove(event, cameraRef.current, setFov, lastPinchDistanceRef)}
+            onWheel={(event) => handleWheel(event, cameraRef.current, setFov, maxLevel)}
+            onTouchMove={(event) => handleTouchMove(event, cameraRef.current, setFov, lastPinchDistanceRef, maxLevel)}
             onTouchStart={(event) => handleTouchStart(event, lastPinchDistanceRef, setRotate)}
             onTouchEnd={() => handleTouchEnd(lastPinchDistanceRef, setRotate)}
          >

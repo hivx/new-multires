@@ -13,12 +13,13 @@ export const handleWheel = (
    event: React.WheelEvent<HTMLDivElement>,
    cameraRef: THREE.PerspectiveCamera,
    setFov: ({ fov }: { fov: number }) => void,
+   maxLevel: number,
 ) => {
-   const minFov = (window.innerHeight * 100) / (512 * 2 ** (3 - 2) * 0.9 * 2);
+   const minFov = (window.innerHeight * 100) / (512 * 2 ** (maxLevel - 2) * 0.9 * 2);
    if (cameraRef) {
       // Lấy camera từ ref và thay đổi fov
       const camera = cameraRef;
-      const newFov = MathUtils.clamp(camera.fov + event.deltaY * 0.05, minFov, 100);
+      const newFov = MathUtils.clamp(camera.fov + event.deltaY * (camera.fov / 1000), minFov, 100);
       camera.fov = newFov;
 
       // Gọi debounce để cập nhật fov
@@ -50,7 +51,7 @@ export const handleTouchMove = (
    camera: THREE.PerspectiveCamera,
    setFov: ({ fov }: { fov: number }) => void,
    lastPinchDistanceRef: React.MutableRefObject<number | null>,
-   // maxLevel: number,
+   maxLevel: number,
 ) => {
    if (event.touches.length === 2) {
       event.preventDefault();
@@ -62,8 +63,8 @@ export const handleTouchMove = (
       if (lastPinchDistanceRef.current !== null) {
          const pinchDelta = lastPinchDistanceRef.current - currentPinchDistance;
 
-         const minFov = (window.innerHeight * 100) / (512 * 2 ** (3 - 2) * 0.9 * 2);
-         const newFov = MathUtils.clamp(camera.fov + pinchDelta * 0.05, minFov, 100);
+         const minFov = (window.innerHeight * 100) / (512 * 2 ** (maxLevel - 2) * 0.9 * 2);
+         const newFov = MathUtils.clamp(camera.fov + pinchDelta * (camera.fov / 700), minFov, 100);
 
          camera.fov = newFov;
          setFov({ fov: newFov });

@@ -100,7 +100,7 @@ const Cube = ({ id }: { id: string }) => {
                const row = Math.floor(index / level);
                const col = index % level;
                visibleCells.push({
-                  id: `-${col}-${row}`, // ID của ô
+                  id: `${face.name}-${col}-${row}`, // ID của ô
                   position: pos, // Lưu vị trí
                });
             }
@@ -150,7 +150,7 @@ const Cube = ({ id }: { id: string }) => {
             // Kiểm tra và khởi tạo dữ liệu cho cấp độ cuối cùng
             if (!createdLevelsRef.current.has(newLevelNumber)) {
                setPositions(newLevelNumber); // Chuẩn bị các vị trí mới
-
+               console.log('Create level', newLevelNumber);
                createdLevelsRef.current.add(newLevelNumber); // Đánh dấu cấp độ đã tạo
             }
          }

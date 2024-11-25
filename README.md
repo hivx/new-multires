@@ -10,7 +10,7 @@ npm install && npm run dev
 yarn install && yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
 <h2>Multi Resolution - Thư mục Multires</h2>
 <p>Dùng tham khảo,không tạo nhánh ,không commit vào repo này</p>
